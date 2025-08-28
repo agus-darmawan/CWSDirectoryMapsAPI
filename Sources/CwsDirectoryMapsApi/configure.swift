@@ -30,7 +30,16 @@ public func configure(_ app: Application) async throws {
     }
 
     // Migrations
-    app.migrations.add(CreateTodo())
+    app.migrations.add(CreateFacilityType())
+    app.migrations.add(CreateTenantCategories())
+    app.migrations.add(CreateLocation())
+    app.migrations.add(CreateDetails())
+    app.migrations.add(CreateFacilities())
+
+    // Run migrations
+    try await app.autoMigrate()
+    app.logger.info("✅ Migrations completed.")
+
 
     // Register routes
     try routes(app)
