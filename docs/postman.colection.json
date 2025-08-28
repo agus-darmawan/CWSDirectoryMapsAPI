@@ -1,0 +1,719 @@
+{
+	"info": {
+		"_postman_id": "cws-directory-maps-api",
+		"name": "CWS Directory Maps API",
+		"description": "Complete API testing collection for CWS Directory Maps API built with Vapor and PostgreSQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8080",
+			"type": "string"
+		},
+		{
+			"key": "api_version",
+			"value": "v1",
+			"type": "string"
+		},
+		{
+			"key": "facility_type_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "tenant_category_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "location_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "detail_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "facility_id",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Root Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}",
+							"host": ["{{base_url}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hello World",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/hello",
+							"host": ["{{base_url}}"],
+							"path": ["hello"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Facility Types",
+			"item": [
+				{
+					"name": "Get All Facility Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facility-types",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facility-types"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Facility Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('facility_type_id', response.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Restaurant\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facility-types",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facility-types"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Facility Type by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facility-types/{{facility_type_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facility-types", "{{facility_type_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Facility Type",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Fine Dining Restaurant\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facility-types/{{facility_type_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facility-types", "{{facility_type_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Facility Type",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facility-types/{{facility_type_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facility-types", "{{facility_type_id}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tenant Categories",
+			"item": [
+				{
+					"name": "Get All Tenant Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/tenant-categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "tenant-categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tenant Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('tenant_category_id', response.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Food & Beverage\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/tenant-categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "tenant-categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tenant Category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/tenant-categories/{{tenant_category_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "tenant-categories", "{{tenant_category_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tenant Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Food & Beverage Services\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/tenant-categories/{{tenant_category_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "tenant-categories", "{{tenant_category_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tenant Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/tenant-categories/{{tenant_category_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "tenant-categories", "{{tenant_category_id}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Get All Locations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/locations",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "locations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('location_id', response.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"x\": 100.5,\n    \"y\": 200.75,\n    \"z\": 1.0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/locations",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "locations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/locations/{{location_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "locations", "{{location_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Location",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"x\": 150.5,\n    \"y\": 250.75,\n    \"z\": 2.0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/locations/{{location_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "locations", "{{location_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Location",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/locations/{{location_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "locations", "{{location_id}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Details",
+			"item": [
+				{
+					"name": "Get All Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/details",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "details"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('detail_id', response.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Premium Italian restaurant with authentic cuisine and cozy atmosphere\",\n    \"phone\": \"+1-555-0123\",\n    \"website\": \"https://example-restaurant.com\",\n    \"unit\": \"Unit 101A\",\n    \"openTime\": \"11:00\",\n    \"closeTime\": \"22:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/details",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "details"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/details/{{detail_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "details", "{{detail_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Detail",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Premium Italian restaurant with authentic cuisine, cozy atmosphere, and outdoor seating\",\n    \"phone\": \"+1-555-0123\",\n    \"website\": \"https://example-restaurant.com\",\n    \"unit\": \"Unit 101A\",\n    \"openTime\": \"10:30\",\n    \"closeTime\": \"23:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/details/{{detail_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "details", "{{detail_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Detail",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/details/{{detail_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "details", "{{detail_id}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Facilities",
+			"item": [
+				{
+					"name": "Get All Facilities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Facilities with Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities/with-details",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities", "with-details"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Facility",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.collectionVariables.set('facility_id', response.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bella Vista Restaurant\",\n    \"imagePath\": \"/images/restaurants/bella-vista.jpg\",\n    \"facilityTypeID\": {{facility_type_id}},\n    \"tenantCategoryID\": {{tenant_category_id}},\n    \"locationID\": {{location_id}},\n    \"detailID\": {{detail_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Facility by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities/{{facility_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities", "{{facility_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Facility with Details by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities/{{facility_id}}/with-details",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities", "{{facility_id}}", "with-details"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Facility",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bella Vista Ristorante\",\n    \"imagePath\": \"/images/restaurants/bella-vista-updated.jpg\",\n    \"facilityTypeID\": {{facility_type_id}},\n    \"tenantCategoryID\": {{tenant_category_id}},\n    \"locationID\": {{location_id}},\n    \"detailID\": {{detail_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities/{{facility_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities", "{{facility_id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Facility",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities/{{facility_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities", "{{facility_id}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Scenarios",
+			"item": [
+				{
+					"name": "Create Minimal Facility (No Optional Fields)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Simple Kiosk\",\n    \"facilityTypeID\": {{facility_type_id}},\n    \"locationID\": {{location_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Invalid Facility Type ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Invalid Facility\",\n    \"facilityTypeID\": 99999,\n    \"locationID\": {{location_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Invalid Location ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Invalid Location\",\n    \"facilityTypeID\": {{facility_type_id}},\n    \"locationID\": 99999\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test 404 - Non-existent Facility",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/facilities/99999",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "facilities", "99999"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location with Default Z",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"x\": 300.0,\n    \"y\": 400.0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/{{api_version}}/locations",
+							"host": ["{{base_url}}"],
+							"path": ["api", "{{api_version}}", "locations"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
