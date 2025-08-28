@@ -5,9 +5,10 @@ import Vapor
 
 // configures your application
 public func configure(_ app: Application) async throws {
-    // uncomment to serve files from /Public folder
-    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    // Serve files from /Public folder
+    app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
+    // Database config
     app.databases.use(DatabaseConfigurationFactory.postgres(configuration: .init(
         hostname: Environment.get("DATABASE_HOST") ?? "localhost",
         port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? SQLPostgresConfiguration.ianaPortNumber,
@@ -17,8 +18,20 @@ public func configure(_ app: Application) async throws {
         tls: .prefer(try .init(configuration: .clientDefault)))
     ), as: .psql)
 
+    do {
+        if let sql = app.db(.psql) as? any SQLDatabase {
+            try await sql.raw("SELECT 1").run()
+        } else {
+            app.logger.error("❌ Failed to cast database to SQLDatabase.")
+        }
+        app.logger.info("✅ Successfully connected to Postgres database.")
+    } catch {
+        app.logger.error("❌ Failed to connect to Postgres database: \(error.localizedDescription)")
+    }
+
+    // Migrations
     app.migrations.add(CreateTodo())
 
-    // register routes
+    // Register routes
     try routes(app)
 }

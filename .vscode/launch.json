@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:cws-directory-maps-api}",
+            "name": "Debug CwsDirectoryMapsApi",
+            "program": "${workspaceFolder:cws-directory-maps-api}/.build/debug/CwsDirectoryMapsApi",
+            "preLaunchTask": "swift: Build Debug CwsDirectoryMapsApi"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:cws-directory-maps-api}",
+            "name": "Release CwsDirectoryMapsApi",
+            "program": "${workspaceFolder:cws-directory-maps-api}/.build/release/CwsDirectoryMapsApi",
+            "preLaunchTask": "swift: Build Release CwsDirectoryMapsApi"
+        }
+    ]
+}
